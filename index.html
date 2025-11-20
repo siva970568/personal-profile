@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="blobs-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Left Column: Profile Info -->
+        <div class="profile-section">
+            <div class="photo-container">
+                <img id="profile-photo" src="" alt="Profile Photo" class="profile-photo">
+            </div>
+            <h1 id="name" class="name">Loading...</h1>
+            <p id="role" class="role">Loading...</p>
+
+            <div class="stats-grid">
+                <div id="age-card" class="stat-card" style="display: none;">
+                    <span id="age" class="stat-value">--</span>
+                    <span class="stat-label">Years Old</span>
+                </div>
+                <!-- We can add more stats here if needed -->
+            </div>
+        </div>
+
+        <!-- Right Column: Content -->
+        <div class="content-section">
+            <h2 class="section-title">About Me</h2>
+            <div id="experience" class="experience-text">
+                Loading experience...
+            </div>
+
+            <!-- Education Section -->
+            <h2 class="section-title" style="margin-top: 40px;">Education</h2>
+            <div id="education-grid" class="education-grid">
+                <!-- Education cards will be injected here -->
+            </div>
+
+            <!-- Detailed Experience Link -->
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="experience.html" class="social-btn"
+                    style="display: inline-flex; justify-content: center; width: auto;">
+                    View Detailed Experience →
+                </a>
+            </div>
+
+            <div id="social-links" class="social-links">
+                <!-- Social buttons will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Data and Script -->
+    <script src="profileData.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

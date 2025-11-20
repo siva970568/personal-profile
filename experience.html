@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Experience - Siva Reddy Durgempudi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Page-specific overrides for the experience page */
+        body {
+            overflow-y: auto;
+            height: auto;
+            display: block;
+            padding-bottom: 50px;
+        }
+
+        .exp-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: #000;
+            transform: translateX(-5px);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            opacity: 0.5;
+        }
+
+        .job-card {
+            background: rgba(20, 20, 35, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px) translateZ(20px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 30px;
+            width: 14px;
+            height: 14px;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0;
+            background: linear-gradient(to right, #fff, #a5f3fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .job-role {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .job-meta {
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .job-location {
+            display: block;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .responsibilities-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .responsibilities-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .responsibilities-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .job-meta {
+                text-align: left;
+                margin-top: 10px;
+            }
+
+            .timeline {
+                padding-left: 20px;
+            }
+
+            .job-card::before {
+                left: -26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Ambience -->
+    <div class="blobs-container"></div>
+
+    <div class="exp-container">
+        <a href="index.html" class="back-btn">← Back to Profile</a>
+
+        <h1 class="section-title" style="margin-bottom: 50px; font-size: 2.5rem;">Professional Experience</h1>
+
+        <div class="timeline" id="experience-timeline">
+            <!-- Job cards will be injected here via JS -->
+        </div>
+    </div>
+
+    <script src="profileData.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Apply Theme Colors
+            const root = document.documentElement;
+            if (profileData.theme) {
+                root.style.setProperty('--primary', profileData.theme.primaryColor);
+                root.style.setProperty('--secondary', profileData.theme.secondaryColor);
+                root.style.setProperty('--accent', profileData.theme.accentColor);
+                root.style.setProperty('--bg-dark', profileData.theme.backgroundColor);
+            }
+
+            const timelineContainer = document.getElementById('experience-timeline');
+
+            if (profileData.detailedExperience) {
+                profileData.detailedExperience.forEach((job, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'job-card';
+
+                    // Staggered animation delay
+                    card.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.2}s`;
+                    card.style.opacity = '0'; // Start hidden for animation
+
+                    // Build responsibilities list
+                    const respList = job.responsibilities.map(resp => `<li>${resp}</li>`).join('');
+
+                    card.innerHTML = `
+                        <div class="job-header">
+                            <div>
+                                <h2 class="company-name">${job.company}</h2>
+                                <div class="job-role">${job.role}</div>
+                            </div>
+                            <div class="job-meta">
+                                <div class="job-duration">${job.duration}</div>
+                                <span class="job-location">${job.location}</span>
+                            </div>
+                        </div>
+                        <ul class="responsibilities-list">
+                            ${respList}
+                        </ul>
+                    `;
+                    timelineContainer.appendChild(card);
+                });
+            }
+
+            // Simple fade in animation
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes fadeInUp {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // 3D Tilt for Job Cards
+            const cards = document.querySelectorAll('.job-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -5; // Subtle tilt
+                    const rotateY = ((x - centerX) / centerX) * 5;
+
+                    card.style.transform = `perspective(1000px) translateZ(10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) translateZ(0) rotateX(0) rotateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
