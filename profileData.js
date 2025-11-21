@@ -192,7 +192,7 @@ const profileData = {
     socialLinks: {
         linkedin: "#",
         phone: "tel:+1234567890", // Replace with your actual phone number
-        email: "mailto:your.email@example.com"
+        email: "mailto:siva.durgempudi92@gmail.com"
     },
 
     // Theme Configuration

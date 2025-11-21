@@ -41,6 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.className = 'social-btn';
                 link.target = '_blank';
                 link.textContent = platform.charAt(0).toUpperCase() + platform.slice(1);
+
+                if (url.startsWith('mailto:')) {
+                    link.addEventListener('click', (e) => {
+                        // Optional: Prevent default if you ONLY want the alert and not the app to open
+                        // e.preventDefault(); 
+                        const email = url.replace('mailto:', '');
+                        alert("My Email Address is:\n" + email);
+                    });
+                }
+
                 socialContainer.appendChild(link);
             }
         });
