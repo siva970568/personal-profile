@@ -65,7 +65,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 8. Initialize Magic Effects
+    // 8. Render Certifications
+    const certGrid = document.getElementById('certifications-grid');
+
+    if (profileData.certifications && certGrid) {
+        profileData.certifications.forEach(cert => {
+            const card = document.createElement('div');
+            card.className = 'education-card'; // Reusing card style
+            card.style.display = 'flex';
+            card.style.alignItems = 'center';
+            card.style.gap = '15px';
+
+            card.innerHTML = `
+                <img src="${cert.badgeUrl}" alt="${cert.name}" style="width: 60px; height: 60px; object-fit: contain;">
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 5px; font-size: 1.1rem;">${cert.name}</h3>
+                    <div style="color: #fff; font-weight: 600; font-size: 0.9rem;">${cert.issuer}</div>
+                    <div style="color: var(--text-muted); font-size: 0.8rem; margin-top: 3px;">${cert.date}</div>
+                </div>
+            `;
+            certGrid.appendChild(card);
+        });
+    }
+
+    // 9. Initialize Magic Effects
     initMagicEffects();
 });
 

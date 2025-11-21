@@ -44,6 +44,16 @@ const profileData = {
         }
     ],
 
+    // Certifications
+    certifications: [
+        {
+            name: "AWS Certified Solutions Architect – Associate",
+            issuer: "Amazon Web Services",
+            date: "May 2025 (Expired)",
+            badgeUrl: "https://d1.awsstatic.com/training-and-certification/certification-badges/AWS-Certified-Solutions-Architect-Associate_badge.3419559c682629072f1eb968d59dea0741772c0f.png"
+        }
+    ],
+
     // Detailed Professional Experience
     detailedExperience: [
         {
